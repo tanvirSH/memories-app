@@ -1,41 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { Container } from '@material-ui/core';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { getPosts } from './actions/posts';
-import memories from './images/memories.jpg';
-import Form from './components/Form/Form';
-import Posts from './components/Posts/Posts';
-import useStyle from './styles';
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
+import Auth from './components/Auth/Auth';
 
 const App = () => {
-  const [currentId, setCurrentId ] = useState(null);
-  const classes = useStyle();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch])
+  
   
   return (
+    <BrowserRouter>
     <Container maxwidth='lg'>
-        <AppBar position='static' color='inherit' className={classes.appBar}>
-            <Typography variant='h2' align='center'>Memories</Typography>
-            <img src={memories} alt='memories' height='60' className={classes.image} />
-        </AppBar>
-        <Grow in>
-            <Container>
-                <Grid container className={classes.mainContainer} spacing={3} justifyContent='space-between' alignItems='stretch'>
-                  <Grid item xs={12} sm={7}>
-                      <Posts  setCurrentId={setCurrentId} />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                      <Form currentId={currentId} setCurrentId={setCurrentId} />
-                  </Grid>
-                </Grid>
-            </Container>
-        </Grow>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />}/>
+        <Route path='/auth' element={<Auth />}/>
+      </Routes>
+        
     </Container>
+    </BrowserRouter>
   )
 }
 
