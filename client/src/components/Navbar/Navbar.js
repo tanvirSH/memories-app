@@ -4,7 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import decode from 'jwt-decode';
 
-import memories from "../../images/memories.png";
+import memories from "../../images/memories-Logo.png";
+import memoriesText from "../../images/memories-Text.png";
 import useStyle from "./styles";
 
 const Navbar = () => {
@@ -34,19 +35,25 @@ const Navbar = () => {
 
   return (
     <AppBar position="static" color="inherit" className={classes.appBar}>
-      <div className={classes.brandContainer} >
+      <Link to="/" className={classes.brandContainer} >
 
       
-      <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">
+      {/* <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">
         Memories
-      </Typography>
+      </Typography> */}
+      <img
+        src={memoriesText}
+        alt="memories"
+        height="40"
+        className={classes.image}
+      />
       <img
         src={memories}
         alt="memories"
-        height="60"
+        height="30"
         className={classes.image}
       />
-      </div>
+      </Link>
       <Toolbar className={classes.toolbar}>
         {user ? (
           <div className={classes.profile}>

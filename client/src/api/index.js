@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-//const url = 'https://memorie-tanvir-proj.herokuapp.com/posts';
-
 const APIBase = axios.create({ baseURL: 'http://localhost:5000'});
 
 APIBase.interceptors.request.use((req) => {
@@ -12,7 +10,11 @@ APIBase.interceptors.request.use((req) => {
     return req;
 });
 
-export const fetchPots = () => APIBase.get('/posts');
+export const fetchPost = (id) => APIBase.get(`/posts/${id}`);
+
+export const fetchPosts = (page) => APIBase.get(`/posts?page=${page}`);
+
+export const getPostBySearch = (searchQuery) => APIBase.get(`/posts/search?searchQuery=${searchQuery.search || 'none'}&tags=${searchQuery.tags}`);
 
 export const createPost = async (newPost) => {
     return await APIBase.post('/posts', newPost);
